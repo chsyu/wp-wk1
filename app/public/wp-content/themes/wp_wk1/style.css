@@ -1,0 +1,38 @@
+/*
+Theme Name: TestTheme
+Author: chsyu
+Version: 1.9
+*/
+
+h1 {
+   color: blue;
+}
+
+.header-title {
+   color: red
+}
+
+.navBar__elements {
+   float: left;
+   margin-right: 20px;
+   text-decoration: none;
+   list-style: none;
+   font-size: 130%;
+}
+
+.navBar__elements a {
+   text-decoration: none;
+   background-color: lightgray;
+   padding: 10px 20px;
+}
+
+.navBar__elements a:hover {
+   background-color: darkgray;
+   color: white;
+}
+
+.clear:after {
+   content: "";
+   display: block;
+   clear: both;
+}

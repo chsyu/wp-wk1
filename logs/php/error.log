@@ -1,0 +1,31 @@
+[10-Mar-2018 14:02:30 UTC] PHP Warning:  call_user_func_array() expects parameter 1 to be a valid callback, function 'web_file1s' not found or invalid function name in /app/public/wp-includes/class-wp-hook.php on line 286
+[10-Mar-2018 15:56:52 UTC] PHP Warning:  A non-numeric value encountered in /app/public/wp-content/themes/wp_wk1/page-sample-page.php on line 1
+[10-Mar-2018 15:56:52 UTC] PHP Warning:  A non-numeric value encountered in /app/public/wp-content/themes/wp_wk1/page-sample-page.php on line 1
+[18-Mar-2018 06:55:33 UTC] PHP Fatal error:  Uncaught Error: Function name must be a string in /app/public/wp-content/themes/wp_wk1/front-page.php:17
+Stack trace:
+#0 /app/public/wp-includes/template-loader.php(74): include()
+#1 /app/public/wp-blog-header.php(19): require_once('/app/public/wp-...')
+#2 /app/public/index.php(17): require('/app/public/wp-...')
+#3 {main}
+  thrown in /app/public/wp-content/themes/wp_wk1/front-page.php on line 17
+[18-Mar-2018 06:55:55 UTC] PHP Fatal error:  Uncaught Error: Function name must be a string in /app/public/wp-content/themes/wp_wk1/front-page.php:17
+Stack trace:
+#0 /app/public/wp-includes/template-loader.php(74): include()
+#1 /app/public/wp-blog-header.php(19): require_once('/app/public/wp-...')
+#2 /app/public/index.php(17): require('/app/public/wp-...')
+#3 {main}
+  thrown in /app/public/wp-content/themes/wp_wk1/front-page.php on line 17
+[18-Mar-2018 06:55:57 UTC] PHP Fatal error:  Uncaught Error: Function name must be a string in /app/public/wp-content/themes/wp_wk1/front-page.php:17
+Stack trace:
+#0 /app/public/wp-includes/template-loader.php(74): include()
+#1 /app/public/wp-blog-header.php(19): require_once('/app/public/wp-...')
+#2 /app/public/index.php(17): require('/app/public/wp-...')
+#3 {main}
+  thrown in /app/public/wp-content/themes/wp_wk1/front-page.php on line 17
+[18-Mar-2018 06:55:58 UTC] PHP Fatal error:  Uncaught Error: Function name must be a string in /app/public/wp-content/themes/wp_wk1/front-page.php:17
+Stack trace:
+#0 /app/public/wp-includes/template-loader.php(74): include()
+#1 /app/public/wp-blog-header.php(19): require_once('/app/public/wp-...')
+#2 /app/public/index.php(17): require('/app/public/wp-...')
+#3 {main}
+  thrown in /app/public/wp-content/themes/wp_wk1/front-page.php on line 17
