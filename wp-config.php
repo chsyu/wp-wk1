@@ -18,26 +18,37 @@
  * @package WordPress
  */
 
-// ** MySQL settings ** //
+// Sendgrid settings - Read in the sendgrid auth from the config //
+define('SENDGRID_USERNAME', $_ENV["SENDGRID_USERNAME"]);
+define('SENDGRID_PASSWORD', $_ENV["SENDGRID_PASSWORD"]); 
+  
+// S3 Config Info - read the S3 Access Keys from the config //
+define( 'AWS_ACCESS_KEY_ID', $_ENV["AWS_ACCESS_KEY_ID"]);
+define( 'AWS_SECRET_ACCESS_KEY', $_ENV["AWS_SECRET_ACCESS_KEY"]); 
+ 
+// ** ClearDB settings - from Heroku Environment ** //
+$db = parse_url($_ENV["CLEARDB_DATABASE_URL"]); 
+
+// ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'local' );
+define('DB_NAME', trim($db["path"],"/"));
 
 /** MySQL database username */
-define( 'DB_USER', 'root' );
+define('DB_USER', $db["user"]);
 
 /** MySQL database password */
-define( 'DB_PASSWORD', 'root' );
+define('DB_PASSWORD', $db["pass"]);
 
 /** MySQL hostname */
-define( 'DB_HOST', 'localhost' );
+define('DB_HOST', $db["host"]);
 
 /** Database Charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8' );
+define('DB_CHARSET', 'utf8');
 
 /** The Database Collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', '' );
+define('DB_COLLATE', '');
 
-/**
+/**#@+
  * Authentication Unique Keys and Salts.
  *
  * Change these to different unique phrases!
@@ -46,41 +57,50 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         '++mCtkRYWvbeUrNSwONjxfRmO6askOsh0R+5Inw0UoRpz9QJHUHfYiJwLvbT1Qzx98Atmj5vKBjSJNmiNhbBTQ==');
-define('SECURE_AUTH_KEY',  'WDjK4eOp+l+2VHtf+c0QeMNLVi/G28N0A4G0Mk9nTMZ/slgNvdmIfOXxIYl/2eMwqfdWpVHvF6FbynmTEkIBww==');
-define('LOGGED_IN_KEY',    'hio6N0qEtMmsRyB4fbio8LJLCfu/4zqF8cie3eTRkB1K+wCkUsOzjpmLkVBO5v1zxAVYpnf2bU9uPpPKIMmE2A==');
-define('NONCE_KEY',        'F5omOPH0P90bmjYxLslwyh1p3uYajpKHbobYisZXxxsvgFJtNiUPZHtDUKbedAQYn8yekK2Xjxih8JnZloXnpA==');
-define('AUTH_SALT',        'LvdDUB85fkGu/uEnEc0g9GVspjZ9ntLAj60LDMLrNaMosKZzYKkBZmzkn3/cHA8wiNwgFlhs6CZazYm5ypC9fw==');
-define('SECURE_AUTH_SALT', 'IAOoq7h2pzE8NjDzuSbqnJFtIHX1fzXKYBW9O2AdxMnNp64Y92B2zTBOTjL8ZKEwOC3z+7gxD2t6xMFYZfjsIA==');
-define('LOGGED_IN_SALT',   'U9fH4cd6LhxgCSEhHmFXc7TOdlQ/dsQK90lneE/4FLv4aqwQ/cAWo/GNTPaRCK1mc1SsaLtaeesNnbxxsTUf4g==');
-define('NONCE_SALT',       'qmSWFWlxcS7awcB5+EK3kdYy33YtCDKawgei9M3ib/46ZSxzOI6AEnyHJ9WJ57mHKKaLMTMm35geRk3Hqlh7CA==');
+define('AUTH_KEY',         $_ENV["AUTH_KEY"]);
+define('SECURE_AUTH_KEY',  $_ENV["SECURE_AUTH_KEY"]);
+define('LOGGED_IN_KEY',    $_ENV["LOGGED_IN_KEY"]);
+define('NONCE_KEY',        $_ENV["NONCE_KEY"]);
+define('AUTH_SALT',        $_ENV["AUTH_SALT"]);
+define('SECURE_AUTH_SALT', $_ENV["SECURE_AUTH_SALT"]);
+define('LOGGED_IN_SALT',   $_ENV["LOGGED_IN_SALT"]);
+define('NONCE_SALT',       $_ENV["NONCE_SALT"]);
+
+/**#@-*/
 
 /**
  * WordPress Database Table prefix.
  *
- * You can have multiple installations in one database if you give each
- * a unique prefix. Only numbers, letters, and underscores please!
+ * You can have multiple installations in one database if you give each a unique
+ * prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix = 'wp_';
+$table_prefix  = 'wp_';
 
+/**
+ * WordPress Localized Language, defaults to English.
+ *
+ * Change this to localize WordPress. A corresponding MO file for the chosen
+ * language must be installed to wp-content/languages. For example, install
+ * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
+ * language support.
+ */
+define('WPLANG', 'en');
 
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
+ */
+define('WP_DEBUG', false);
+define( 'WP_AUTO_UPDATE_CORE', false );
 
-
-
-/* Inserted by Local by Flywheel. See: http://codex.wordpress.org/Administration_Over_SSL#Using_a_Reverse_Proxy */
-if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) {
-	$_SERVER['HTTPS'] = 'on';
-}
-
-/* Inserted by Local by Flywheel. Fixes $is_nginx global for rewrites. */
-if ( ! empty( $_SERVER['SERVER_SOFTWARE'] ) && strpos( $_SERVER['SERVER_SOFTWARE'], 'Flywheel/' ) !== false ) {
-	$_SERVER['SERVER_SOFTWARE'] = 'nginx/1.10.1';
-}
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
-if ( ! defined( 'ABSPATH' ) )
-	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
+if ( !defined('ABSPATH') )
+	define('ABSPATH', dirname(__FILE__) . '/');
 
 /** Sets up WordPress vars and included files. */
-require_once ABSPATH . 'wp-settings.php';
+require_once(ABSPATH . 'wp-settings.php');
